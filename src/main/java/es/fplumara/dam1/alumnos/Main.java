@@ -10,14 +10,13 @@ import es.fplumara.dam1.alumnos.service.AlumnoServiceImpl;
 public class Main {
 
     public static void main(String[] args) {
-        String url  = "jdbc:h2:mem:dam1;DB_CLOSE_DELAY=-1;MODE=PostgreSQL";
-        String user = "sa";
-        String pass = "";
+        String url  = "jdbc:postgresql://localhost:5432/dam1";
+        String user = "dam1";
+        String pass = "dam1pass";
 
         AlumnoRepository repo = new AlumnoRepositoryDB(url, user, pass);
         repo.initSchema();
         AlumnoService service = new AlumnoServiceImpl(repo);
-
 
         Alumno a1 = new Alumno(null, "John", "Doe", 2015);
         Alumno a2 = new Alumno(null, "Jane", "Doe", 2018);
