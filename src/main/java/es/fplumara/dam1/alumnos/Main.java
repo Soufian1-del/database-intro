@@ -2,7 +2,6 @@ package es.fplumara.dam1.alumnos;
 
 import es.fplumara.dam1.alumnos.model.Alumno;
 import es.fplumara.dam1.alumnos.repository.AlumnoRepository;
-import es.fplumara.dam1.alumnos.repository.AlumnoRepositoryDB;
 import es.fplumara.dam1.alumnos.repository.AlumnoRepositoryInMemory;
 import es.fplumara.dam1.alumnos.service.AlumnoService;
 import es.fplumara.dam1.alumnos.service.AlumnoServiceImpl;
@@ -10,11 +9,8 @@ import es.fplumara.dam1.alumnos.service.AlumnoServiceImpl;
 public class Main {
 
     public static void main(String[] args) {
-        String url  = "jdbc:h2:mem:dam1;DB_CLOSE_DELAY=-1;MODE=PostgreSQL";
-        String user = "sa";
-        String pass = "";
 
-        AlumnoRepository repo = new AlumnoRepositoryDB(url, user, pass);
+        AlumnoRepository repo = new AlumnoRepositoryInMemory();
         repo.initSchema();
         AlumnoService service = new AlumnoServiceImpl(repo);
 
