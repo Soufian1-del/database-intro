@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS alumnos (
-   id INT AUTO_INCREMENT PRIMARY KEY,
-   nombre VARCHAR(100) NOT NULL,
-   apellidos VARCHAR(150) NOT NULL,
-   anio_nacimiento INT NOT NULL
-);

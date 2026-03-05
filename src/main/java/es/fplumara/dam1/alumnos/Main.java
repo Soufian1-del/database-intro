@@ -2,7 +2,6 @@ package es.fplumara.dam1.alumnos;
 
 import es.fplumara.dam1.alumnos.model.Alumno;
 import es.fplumara.dam1.alumnos.repository.AlumnoRepository;
-import es.fplumara.dam1.alumnos.repository.AlumnoRepositoryDB;
 import es.fplumara.dam1.alumnos.repository.AlumnoRepositoryInMemory;
 import es.fplumara.dam1.alumnos.service.AlumnoService;
 import es.fplumara.dam1.alumnos.service.AlumnoServiceImpl;
@@ -14,7 +13,7 @@ public class Main {
         String user = "dam1";
         String pass = "dam1pass";
 
-        AlumnoRepository repo = new AlumnoRepositoryDB(url, user, pass);
+        AlumnoRepository repo = new AlumnoRepositoryInMemory();
         repo.initSchema();
         AlumnoService service = new AlumnoServiceImpl(repo);
 
