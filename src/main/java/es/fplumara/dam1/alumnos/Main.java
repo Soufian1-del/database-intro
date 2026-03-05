@@ -9,11 +9,13 @@ import es.fplumara.dam1.alumnos.service.AlumnoServiceImpl;
 public class Main {
 
     public static void main(String[] args) {
+        String url  = "jdbc:postgresql://localhost:5432/dam1";
+        String user = "dam1";
+        String pass = "dam1pass";
 
         AlumnoRepository repo = new AlumnoRepositoryInMemory();
         repo.initSchema();
         AlumnoService service = new AlumnoServiceImpl(repo);
-
 
         Alumno a1 = new Alumno(null, "John", "Doe", 2015);
         Alumno a2 = new Alumno(null, "Jane", "Doe", 2018);
