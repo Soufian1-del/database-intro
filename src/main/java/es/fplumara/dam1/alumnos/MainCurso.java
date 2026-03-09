@@ -26,9 +26,10 @@ public class MainCurso {
         cursoRepo.crearCurso(14435, "lenguaje de marcas", false);
         cursoRepo.crearCurso(14323, "lenguaje de marcas", true);
 
-
-        cursoRepo.listarOrdenadoPorCampo("nombre", "ascendente");
-        cursoRepo.listarPorEstado(true);
+;
+        cursoRepo.listarOrdenadoPorCampo("nombre", "ascendente").forEach(System.out::println);
+        System.out.println("------------------");
+        cursoRepo.listarPorEstado(true).forEach(System.out::println);
         cursoRepo.eliminarSiNombreContiene("marc");
         cursoRepo.activar(18432);
 }

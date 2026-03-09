@@ -77,15 +77,15 @@ public class CursoRepositoryDB implements CursoRepository{
 
     @Override
     public void eliminarSiNombreContiene(String nombre) {
-        String sql = "DELETE FROM CURSOS WHERE nombre like '%?%' ";
+        String sql = "DELETE FROM CURSOS WHERE nombre like %?%";
 
         try {
             Connection c = getConnection();
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, nombre);
-            ResultSet rs = ps.executeQuery();
+             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Error buscando cursos por id " + nombre, e);
+            throw new RuntimeException("Error buscando cursos por nombre " + nombre, e);
         }
     }
 
@@ -112,11 +112,12 @@ public class CursoRepositoryDB implements CursoRepository{
     public List<Curso> listarOrdenadoPorCampo(String campo, String tipoDeOrden) {
         try {
             if (tipoDeOrden.equalsIgnoreCase("ASCENDENTE")) {
-                String sql = "SELECT * FROM CURSO ORDER BY ? asc";
+                String sql = "SELECT * FROM CURSOS ORDER BY ? asc";
 
                 Connection c = getConnection();
                 PreparedStatement ps = c.prepareStatement(sql);
                 ps.setString(1, campo);
+                System.out.println(ps);
                 ResultSet rs = ps.executeQuery();
 
                 List<Curso> out = new ArrayList<>();
@@ -126,7 +127,7 @@ public class CursoRepositoryDB implements CursoRepository{
                 return out;
 
             } else if (tipoDeOrden.equalsIgnoreCase("DESCEDENTE")) {
-                String sql = "SELECT * FROM CURSO ORDER BY ? DESC";
+                String sql = "SELECT * FROM CURSOS ORDER BY ? DESC";
 
                 Connection c = getConnection();
                 PreparedStatement ps = c.prepareStatement(sql);
