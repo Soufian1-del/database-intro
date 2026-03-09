@@ -36,4 +36,13 @@ public class Curso {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
+
+    @Override
+    public String toString() {
+        return "Curso{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", activo=" + activo +
+                '}';
+    }
 }
