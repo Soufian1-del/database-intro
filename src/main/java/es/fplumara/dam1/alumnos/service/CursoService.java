@@ -9,6 +9,8 @@ public interface CursoService {
 
     void activar(int id);
 
+    void crearCurso(int id, String nombre, Boolean activo);
+
     void eliminarSiNombreContiene(String nombre);
 
     List<Curso> listarPorEstado(boolean activo);

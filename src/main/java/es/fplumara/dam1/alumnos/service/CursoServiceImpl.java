@@ -25,8 +25,17 @@ public class CursoServiceImpl implements CursoService {
     }
 
     @Override
+    public void crearCurso(int id, String nombre, Boolean activo) {
+        if(id<0 || nombre==null || activo==null){
+            throw new RuntimeException("los valores deben de ser validos");
+        } else cursoRepo.crearCurso(id,nombre,activo);
+    }
+
+    @Override
     public void eliminarSiNombreContiene(String nombre) {
-        cursoRepo.eliminarSiNombreContiene(nombre);
+        if(nombre==null){
+            throw new RuntimeException("el nombre debe de ser valido");
+        } else cursoRepo.eliminarSiNombreContiene(nombre);
     }
 
     @Override
@@ -36,6 +45,9 @@ public class CursoServiceImpl implements CursoService {
 
     @Override
     public List<Curso> listarOrdenadoPorCampo(String campo, String tipoDeOrden) {
+        if(campo==null || tipoDeOrden==null){
+            throw new RuntimeException("porfavor, inserta valores validos");
+        } else
         return cursoRepo.listarOrdenadoPorCampo(campo,tipoDeOrden);
     }
 
