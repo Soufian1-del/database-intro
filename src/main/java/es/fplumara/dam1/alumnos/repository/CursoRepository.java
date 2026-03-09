@@ -17,5 +17,5 @@ public interface CursoRepository {
 
     List<Curso> listarPorEstado(boolean activo);
 
-    List<Curso> listarOrdenadoPorCampo();
+    List<Curso> listarOrdenadoPorCampo(String campo, String tipoDeOrden);
 }

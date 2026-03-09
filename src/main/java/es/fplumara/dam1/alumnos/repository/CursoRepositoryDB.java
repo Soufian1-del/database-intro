@@ -6,7 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CursoRepositoryDB implements CursoRepository {
+public class CursoRepositoryDB implements CursoRepository{
+
     private final String url;
     private final String user;
     private final String pass;
@@ -56,7 +57,7 @@ public class CursoRepositoryDB implements CursoRepository {
             ResultSet keys = ps.getGeneratedKeys();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error insertando alumno", e);
+            throw new RuntimeException("Error insertando cursos", e);
         }
     }
 
@@ -70,7 +71,7 @@ public class CursoRepositoryDB implements CursoRepository {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
         } catch (SQLException e) {
-            throw new RuntimeException("Error buscando alumno por id " + id, e);
+            throw new RuntimeException("Error buscando cursos por id " + id, e);
         }
     }
 
@@ -84,7 +85,7 @@ public class CursoRepositoryDB implements CursoRepository {
             ps.setString(1, nombre);
             ResultSet rs = ps.executeQuery();
         } catch (SQLException e) {
-            throw new RuntimeException("Error buscando alumno por id " + nombre, e);
+            throw new RuntimeException("Error buscando cursos por id " + nombre, e);
         }
     }
 
@@ -103,28 +104,49 @@ public class CursoRepositoryDB implements CursoRepository {
             return out;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error listando alumnos", e);
+            throw new RuntimeException("Error listando cursos", e);
         }
     }
 
     @Override
-    public List<Curso> listarOrdenadoPorCampo() {
-        String sql = "SELECT * FROM CURSO ORDER BY ?";
+    public List<Curso> listarOrdenadoPorCampo(String campo, String tipoDeOrden) {
         try {
-            Connection c = getConnection();
-            PreparedStatement ps = c.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            if (tipoDeOrden.equalsIgnoreCase("ASCENDENTE")) {
+                String sql = "SELECT * FROM CURSO ORDER BY ? asc";
 
-            List<Curso> out = new ArrayList<>();
-            while (rs.next()) {
-                out.add(mapCursos(rs));
+                Connection c = getConnection();
+                PreparedStatement ps = c.prepareStatement(sql);
+                ps.setString(1, campo);
+                ResultSet rs = ps.executeQuery();
+
+                List<Curso> out = new ArrayList<>();
+                while (rs.next()) {
+                    out.add(mapCursos(rs));
+                }
+                return out;
+
+            } else if (tipoDeOrden.equalsIgnoreCase("DESCEDENTE")) {
+                String sql = "SELECT * FROM CURSO ORDER BY ? DESC";
+
+                Connection c = getConnection();
+                PreparedStatement ps = c.prepareStatement(sql);
+                ps.setString(1, campo);
+                ResultSet rs = ps.executeQuery();
+
+                List<Curso> out = new ArrayList<>();
+                while (rs.next()) {
+                    out.add(mapCursos(rs));
+                }
+                return out;
+
+            }else {
+                throw new IllegalArgumentException("MEtodo de ordanaicón no soportado");
             }
-            return out;
-
         } catch (SQLException e) {
-            throw new RuntimeException("Error listando alumnos", e);
+            throw new RuntimeException("Error listando cursos", e);
         }
     }
+
 
     private Curso mapCursos(ResultSet rs) throws SQLException {
         return new Curso(

@@ -27,7 +27,7 @@ public class MainCurso {
         cursoRepo.crearCurso(14323, "lenguaje de marcas", true);
 
 
-        cursoRepo.listarOrdenadoPorCampo();
+        cursoRepo.listarOrdenadoPorCampo("nombre", "ascendente");
         cursoRepo.listarPorEstado(true);
         cursoRepo.eliminarSiNombreContiene("marc");
         cursoRepo.activar(18432);

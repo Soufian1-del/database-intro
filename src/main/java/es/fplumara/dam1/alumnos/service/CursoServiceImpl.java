@@ -35,7 +35,9 @@ public class CursoServiceImpl implements CursoService {
     }
 
     @Override
-    public List<Curso> listarOrdenadoPorCampo() {
-        return cursoRepo.listarOrdenadoPorCampo();
+    public List<Curso> listarOrdenadoPorCampo(String campo, String tipoDeOrden) {
+        return cursoRepo.listarOrdenadoPorCampo(campo,tipoDeOrden);
     }
+
+
 }
